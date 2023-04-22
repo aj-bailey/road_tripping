@@ -4,11 +4,11 @@ RSpec.describe "Users API Requests" do
   describe "Users Create" do
     context "Sucessful Request" do
       it "creates a new user" do
-        params = { 
-                   "email": "whatever@example.com",
-                   "password": "password",
-                   "password_confirmation": "password"
-                 }
+        params = {
+          "email": "whatever@example.com",
+          "password": "password",
+          "password_confirmation": "password"
+        }
 
         post api_v1_users_path, params: params
 
@@ -27,16 +27,16 @@ RSpec.describe "Users API Requests" do
 
     context "Unsuccessful Request" do
       it "returns 400 serialized error when passwords don't match" do
-        params = { 
-                   "email": "whatever@example.com",
-                   "password": "password",
-                   "password_confirmation": "not_password"
-                 }
+        params = {
+          "email": "whatever@example.com",
+          "password": "password",
+          "password_confirmation": "not_password"
+        }
 
         post api_v1_users_path, params: params
-        
+
         user_response = JSON.parse(response.body, symbolize_names: true)
-        
+
         expect(response).to_not be_successful
         expect(response.status).to eq(400)
 
@@ -46,12 +46,12 @@ RSpec.describe "Users API Requests" do
       end
 
       it "returns a 400 serialized error when email is already taken" do
-        params = { 
+        params = {
           "email": "whatever@example.com",
           "password": "password",
           "password_confirmation": "password"
         }
-        
+
         User.create!(params)
 
         post api_v1_users_path, params: params
@@ -68,9 +68,9 @@ RSpec.describe "Users API Requests" do
 
       it "returns a 400 serialized error when missing fields" do
         params = {
-                   "password": "password",
-                   "password_confirmation": "password"
-                 }
+          "password": "password",
+          "password_confirmation": "password"
+        }
 
         post api_v1_users_path, params: params
 
