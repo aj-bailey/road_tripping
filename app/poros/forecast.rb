@@ -8,6 +8,7 @@ class Forecast
   end
 
   private
+  
     def parse_current_weather(data)
       {
         last_updated: data[:last_updated],

@@ -25,7 +25,6 @@ class ErrorSerializer
     @exception.message[(colon_index + 2)..-1].split(", ")
   end
 
-
   def status
     return 400 if @exception.class == ActiveRecord::RecordInvalid
   end
