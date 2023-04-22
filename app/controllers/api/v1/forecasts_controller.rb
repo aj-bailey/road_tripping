@@ -1,0 +1,7 @@
+class Api::V1::ForecastsController < ApplicationController
+  def index
+    weather_facade = WeatherFacade.new(params)
+
+    render json: ForecastSerializer.new(weather_facade.forecast)
+  end
+end
