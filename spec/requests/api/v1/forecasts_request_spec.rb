@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe "Forecasts API Requests" do
    describe "Forecast Index" do
       it "returns current, 5-day and hourly forecasts", :vcr do
-        VCR.use_cassette("Forecast Request") { get api_v1_forecasts_path(location: "denver,co") }
+        VCR.use_cassette("Forecast Request") { get api_v1_forecast_index_path(location: "denver,co") }
 
         forecast_json = JSON.parse(response.body, symbolize_names: true)
 

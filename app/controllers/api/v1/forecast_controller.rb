@@ -1,4 +1,4 @@
-class Api::V1::ForecastsController < ApplicationController
+class Api::V1::ForecastController < ApplicationController
   def index
     weather_facade = WeatherFacade.new(params)
 
