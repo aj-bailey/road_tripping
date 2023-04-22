@@ -8,6 +8,7 @@ class WeatherService
   end
 
   private
+
     def connection
       Faraday.new(url: "http://api.weatherapi.com")
     end

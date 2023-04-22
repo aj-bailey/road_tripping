@@ -13,6 +13,7 @@ class WeatherFacade
   end
 
   private
+
     def coordinates(location)
       location[:results].first[:locations].first[:latLng]
     end
