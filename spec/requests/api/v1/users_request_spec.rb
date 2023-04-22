@@ -67,7 +67,7 @@ RSpec.describe "Users API Requests" do
       end
 
       it "returns a 400 serialized error when missing fields" do
-        params = { 
+        params = {
                    "password": "password",
                    "password_confirmation": "password"
                  }

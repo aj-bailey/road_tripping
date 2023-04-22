@@ -8,7 +8,7 @@ class MapQuestService
   end
 
   private
-  
+
     def connection
       Faraday.new(url: "https://www.mapquestapi.com")
     end

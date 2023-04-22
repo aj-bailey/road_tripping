@@ -12,9 +12,7 @@ class User < ApplicationRecord
     def generate_unique_api_key
       api_key = SecureRandom.urlsafe_base64
 
-      while find_user_by_api_key(api_key)
-        api_key = SecureRandom.urlsafe_base64
-      end
+      api_key = SecureRandom.urlsafe_base64 while find_user_by_api_key(api_key)
 
       self.api_key = api_key
     end
