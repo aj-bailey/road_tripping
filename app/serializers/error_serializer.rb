@@ -1,5 +1,5 @@
 class ErrorSerializer
-  def initialize(exception)
+  def initialize(exception = nil)
     @exception = exception
   end
 
@@ -27,5 +27,12 @@ class ErrorSerializer
 
   def status
     return 400 if @exception.class == ActiveRecord::RecordInvalid
+  end
+
+  def invalid_credentials
+    {
+      "message": "Invalid Credentials",
+      "errors": "Email or password is incorrect"
+    }
   end
 end
