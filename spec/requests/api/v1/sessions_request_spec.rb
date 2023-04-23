@@ -10,7 +10,7 @@ RSpec.describe "Sessions API Requests" do
       it "returns user json object with api_key when successfully authenticated" do
         params = {
           "email": "whatever@example.com",
-          "password": "password",
+          "password": "password"
         }
 
         post api_v1_sessions_path, params: params
@@ -34,7 +34,7 @@ RSpec.describe "Sessions API Requests" do
       it "returns 401 serialized error when password incorrect with ambiguous message to what was incorrect" do
         params = {
           "email": "whatever@example.com",
-          "password": "wrong_password",
+          "password": "wrong_password"
         }
 
         post api_v1_sessions_path, params: params
@@ -52,7 +52,7 @@ RSpec.describe "Sessions API Requests" do
       it "returns 401 serialized error when email doesn't exist with ambiguous message to what was incorrect" do
         params = {
           "email": "wrong_email@example.com",
-          "password": "password",
+          "password": "password"
         }
 
         post api_v1_sessions_path, params: params
@@ -79,7 +79,7 @@ RSpec.describe "Sessions API Requests" do
         expect(session_response[:message]).to eq("Invalid Credentials")
         expect(session_response[:errors]).to eq("Email or password is incorrect")
       end
-      
+
       it "returns a 401 serialized error when missing fields" do
         params = {
           "password": "password"
