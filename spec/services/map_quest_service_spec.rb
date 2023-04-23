@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe MapQuestService do
   describe "#instance methods" do
-    let(:service) { MapQuestService.new("denver,co")}
+    let(:service) { MapQuestService.new(location: "denver,co")}
     let(:location) { VCR.use_cassette("MapQuest Service Denver") { service.get_location } }
 
     describe "initialize" do

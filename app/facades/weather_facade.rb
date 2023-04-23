@@ -1,10 +1,10 @@
 class WeatherFacade
   def initialize(params)
-    @location = params[:location]
+    @params = params
   end
 
   def forecast
-    map_quest_location = MapQuestService.new(@location).get_location
+    map_quest_location = MapQuestService.new(@params).get_location
     coordinates = coordinates(map_quest_location)
     
     forecast = WeatherService.new(coordinates).get_forecast

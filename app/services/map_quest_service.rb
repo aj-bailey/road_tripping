@@ -1,10 +1,11 @@
 class MapQuestService
-  def initialize(location)
-    @location = location
+  def initialize(params)
+    @params = params
+    # binding.pry
   end
 
   def get_location
-    get_url("/geocoding/v1/address?key=#{ENV["MAP_QUEST_API_KEY"]}&location=#{@location}")
+    get_url("/geocoding/v1/address?key=#{ENV["MAP_QUEST_API_KEY"]}&location=#{@params[:location]}")
   end
 
   private
