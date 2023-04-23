@@ -3,13 +3,28 @@ class RoadTrip
 
   def initialize(data)
     @data = data
-    @start_city = city_state(data[:route][:locations].first)
-    @end_city = city_state(data[:route][:locations].last)
-    @travel_time = data[:route][:formattedTime]
-    @weather_at_eta = destination_weather
+    @start_city
+    @end_city
+    @travel_time
+    @weather_at_eta
+
+    return invalid_route unless @data[:route]
+    valid_route
   end
 
   private
+    def valid_route
+      @start_city = city_state(@data[:route][:locations].first)
+      @end_city = city_state(@data[:route][:locations].last)
+      @travel_time = @data[:route][:formattedTime]
+      @weather_at_eta = destination_weather
+    end
+
+    def invalid_route
+      @start_city = @data[:origin]
+      @end_city = @data[:destination]
+      @travel_time = "Impossible Route"
+    end
 
     def city_state(location)
       "#{location[:adminArea5]}, #{location[:adminArea3]}"

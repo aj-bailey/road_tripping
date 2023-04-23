@@ -5,10 +5,11 @@ class RoadTripFacade
 
   def trip_details
     directions = MapQuestService.new(@params).get_directions
-    destination_coordinates = directions[:route][:locations][-1][:latLng]
+    return RoadTrip.new(@params) if directions[:info][:statuscode] == 402
 
+    destination_coordinates = directions[:route][:locations][-1][:latLng]
     weather = WeatherService.new(destination_coordinates).get_forecast
-    
+
     RoadTrip.new(combine_json_data(directions, weather))
   end
 

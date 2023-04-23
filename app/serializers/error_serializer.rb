@@ -35,4 +35,11 @@ class ErrorSerializer
       "errors": "Email or password is incorrect"
     }
   end
+
+  def invalid_api_key
+    {
+      "message": "Invalid Credentials",
+      "errors": "Unauthorized API key"
+    }
+  end
 end
