@@ -85,7 +85,7 @@ RSpec.describe "Users API Requests" do
         expect(user_response[:errors][1]).to eq("Email is invalid")
       end
 
-      it "returns a 400 serialied error when no body included" do
+      it "returns a 400 serialized error when no body included" do
         post api_v1_users_path
 
         user_response = JSON.parse(response.body, symbolize_names: true)
