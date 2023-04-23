@@ -5,7 +5,7 @@ RSpec.describe "Road Trips API Requests" do
     before(:each) do
       @user = User.create!(email: "whatever@example.com", password: "password", password_confirmation: "password")
     end
-    
+
     context "Successful Request" do
       it "returns road trip json object when api_key successfully authenticated" do
         params = {
