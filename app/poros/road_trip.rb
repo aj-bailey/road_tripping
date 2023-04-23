@@ -27,15 +27,14 @@ class RoadTrip
       trip_duration_seconds = @data[:route][:time]
       destination_local_start_time = @data[:location][:localtime].to_time
       destination_local_end_time = destination_local_start_time + trip_duration_seconds
-      
-      destination_local_end_time.to_datetime.strftime("%Y-%m-%d %k:%M")
+
+      destination_local_end_time.to_datetime.strftime("%Y-%m-%d %H:%M")
     end
 
     def eta_hour_weather
       nearest_hour_date_time = nearest_hour(local_eta)
-
       date_forecast = date_forecast(nearest_hour_date_time)
-      
+
       date_forecast[:hour].find { |hour_forecast| hour_forecast[:time] == nearest_hour_date_time }
     end
 
@@ -48,7 +47,7 @@ class RoadTrip
         nearest_hour_date_time = date_time.to_time.beginning_of_hour
       end
 
-      nearest_hour_date_time.to_datetime.strftime("%Y-%m-%d %k:%M")
+      nearest_hour_date_time.to_datetime.strftime("%Y-%m-%d %H:%M")
     end
 
     def date_forecast(date_time)
