@@ -3,16 +3,16 @@ class RoadTrip
 
   def initialize(data)
     @data = data
-    @start_city
-    @end_city
-    @travel_time
-    @weather_at_eta
 
-    return invalid_route unless @data[:route]
-    valid_route
+    if @data[:route]
+      valid_route
+    else
+      invalid_route
+    end
   end
 
   private
+
     def valid_route
       @start_city = city_state(@data[:route][:locations].first)
       @end_city = city_state(@data[:route][:locations].last)
@@ -56,18 +56,18 @@ class RoadTrip
     def nearest_hour(date_time)
       minutes = date_time.to_datetime.strftime("%M").to_i
 
-      if minutes >= 30
-        nearest_hour_date_time = date_time.to_time.end_of_hour + 1
-      else
-        nearest_hour_date_time = date_time.to_time.beginning_of_hour
-      end
+      nearest_hour_date_time = if minutes >= 30
+                                 date_time.to_time.end_of_hour + 1
+                               else
+                                 date_time.to_time.beginning_of_hour
+                               end
 
       nearest_hour_date_time.to_datetime.strftime("%Y-%m-%d %H:%M")
     end
 
     def date_forecast(date_time)
-      @data[:forecast][:forecastday].find do
-        |forecast_day| forecast_day[:date] == date_time.split(" ")[0]
+      @data[:forecast][:forecastday].find do |forecast_day|
+        forecast_day[:date] == date_time.split(" ")[0]
       end
     end
 end
