@@ -1,4 +1,4 @@
-class Salary
+class Salaries
   attr_reader :id, :destination, :forecast, :salaries
 
   JOB_TITLES = [

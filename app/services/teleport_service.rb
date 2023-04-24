@@ -3,10 +3,10 @@ class TeleportService
     @params = params
   end
 
-  def salary_information
+  def salaries_information
     get_url("api/urban_areas/slug:#{@params[:destination]}/salaries")
   end
-  
+
   private
 
     def connection

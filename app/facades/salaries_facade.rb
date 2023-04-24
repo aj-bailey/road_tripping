@@ -1,13 +1,13 @@
-class SalaryFacade
+class SalariesFacade
   def initialize(params)
     @params = params
   end
 
-  def salary_details
+  def salaries_details
     weather = current_weather
-    salary = TeleportService.new(@params).salary_information
+    salaries = TeleportService.new(@params).salaries_information
     
-    Salary.new(combine_json_data(weather, salary))
+    Salaries.new(combine_json_data(weather, salaries))
   end
 
   private
@@ -19,8 +19,8 @@ class SalaryFacade
       forecast = WeatherService.new(coordinates).get_forecast
     end
 
-    def combine_json_data(weather, salary)
-      weather_salary_json = weather.merge(salary)
-      weather_salary_json.merge(destination: @params[:destination])
+    def combine_json_data(weather, salaries)
+      weather_salaries_json = weather.merge(salaries)
+      weather_salaries_json.merge(destination: @params[:destination])
     end
 end
