@@ -13,7 +13,7 @@ RSpec.describe "Salaries API Request" do
         expect(salaries_response[:data].keys).to contain_exactly(:id, :type, :attributes)
         expect(salaries_response[:data][:id]).to eq(nil)
         expect(salaries_response[:data][:type]).to eq("salaries")
-        
+
         expect(salaries_response[:data][:attributes].keys).to contain_exactly(:destination, :forecast, :salaries)
         expect(salaries_response[:data][:attributes][:destination]).to eq("chicago")
 
@@ -39,7 +39,7 @@ RSpec.describe "Salaries API Request" do
 
         expect(salaries_response.keys).to contain_exactly(:message, :errors)
         expect(salaries_response[:message]).to eq("param is missing or the value is empty")
-        
+
         expect(salaries_response[:errors].count).to eq(1)
         expect(salaries_response[:errors].first).to eq("Missing destination")
       end
@@ -53,7 +53,7 @@ RSpec.describe "Salaries API Request" do
 
         expect(salaries_response.keys).to contain_exactly(:message, :errors)
         expect(salaries_response[:message]).to eq("param is missing or the value is empty")
-        
+
         expect(salaries_response[:errors].count).to eq(1)
         expect(salaries_response[:errors].first).to eq("Missing destination")
       end
@@ -67,7 +67,7 @@ RSpec.describe "Salaries API Request" do
 
         expect(salaries_response.keys).to contain_exactly(:message, :errors)
         expect(salaries_response[:message]).to eq("your query could not be completed")
-        
+
         expect(salaries_response[:errors].count).to eq(1)
         expect(salaries_response[:errors].first).to eq("Destination not found")
       end
