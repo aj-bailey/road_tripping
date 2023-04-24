@@ -9,7 +9,7 @@ class Salaries
     "Software Engineer",
     "Systems Administrator",
     "Web Developer"
-  ]
+  ].freeze
 
   def initialize(data)
     @data = data
@@ -20,6 +20,7 @@ class Salaries
   end
 
   private
+
     def parse_forecast
       {
         "summary": @data[:current][:condition][:text],
@@ -29,12 +30,12 @@ class Salaries
 
     def parse_salaries
       JOB_TITLES.map do |job|
-        salary = @data[:salaries].find { |salary| salary[:job][:title] == job }
-        if salary
+        job_salary = @data[:salaries].find { |salary| salary[:job][:title] == job }
+        if job_salary
           {
             "title": job,
-            "min": convert_to_currency(salary[:salary_percentiles][:percentile_25]),
-            "max": convert_to_currency(salary[:salary_percentiles][:percentile_75])
+            "min": convert_to_currency(job_salary[:salary_percentiles][:percentile_25]),
+            "max": convert_to_currency(job_salary[:salary_percentiles][:percentile_75])
           }
         end
       end.compact
