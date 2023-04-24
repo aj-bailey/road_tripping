@@ -30,7 +30,17 @@ class Salary
     def parse_salaries
       JOB_TITLES.map do |job|
         salary = @data[:salaries].find { |salary| salary[:job][:title] == job }
-        binding.pry
-      end
+        if salary
+          {
+            "title": job,
+            "min": convert_to_currency(salary[:salary_percentiles][:percentile_25]),
+            "max": convert_to_currency(salary[:salary_percentiles][:percentile_75])
+          }
+        end
+      end.compact
+    end
+
+    def convert_to_currency(number)
+      ActionController::Base.helpers.number_to_currency(number)
     end
 end
