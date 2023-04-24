@@ -20,6 +20,7 @@ class SalaryFacade
     end
 
     def combine_json_data(weather, salary)
-      weather.merge(salary)
+      weather_salary_json = weather.merge(salary)
+      weather_salary_json.merge(destination: @params[:destination])
     end
 end
