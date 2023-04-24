@@ -26,7 +26,8 @@ class ErrorSerializer
   end
 
   def status
-    return 400 if @exception.class == ActiveRecord::RecordInvalid
+    return 404 if @exception.class == ActionController::BadRequest
+    400
   end
 
   def invalid_credentials

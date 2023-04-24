@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       resources :road_trip, only: [:create]
       resources :users, only: [:create]
       resources :sessions, only: [:create]
+      resources :salaries, only: [:create]
     end
   end
 end
