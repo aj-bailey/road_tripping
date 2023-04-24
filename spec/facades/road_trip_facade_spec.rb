@@ -4,7 +4,7 @@ RSpec.describe RoadTripFacade do
   describe "#instance methods" do
     let(:facade) { RoadTripFacade.new("origin": "Cincinnati,OH", "destination": "Chicago,IL") }
     let(:trip_details) { VCR.use_cassette("Road Trip Facade") { facade.trip_details } }
-    
+
     describe "#initialize" do
       it "exists" do
         expect(facade).to be_a(RoadTripFacade)
