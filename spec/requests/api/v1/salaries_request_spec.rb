@@ -30,7 +30,47 @@ RSpec.describe "Salaries API Request" do
     end
 
     context "Unsuccessful Request" do
+      it "returns 400 serialized error when missing destination params" do
+        post api_v1_salaries_path(destination: nil)
 
+        salaries_response = JSON.parse(response.body, symbolize_names: true)
+
+        expect(response).to_not be_successful
+
+        expect(salaries_response.keys).to contain_exactly(:message, :errors)
+        expect(salaries_response[:message]).to eq("param is missing or the value is empty")
+        
+        expect(salaries_response[:errors].count).to eq(1)
+        expect(salaries_response[:errors].first).to eq("Missing destination")
+      end
+
+      it "returns 400 serialized error when no params submitted" do
+        post api_v1_salaries_path
+
+        salaries_response = JSON.parse(response.body, symbolize_names: true)
+
+        expect(response).to_not be_successful
+
+        expect(salaries_response.keys).to contain_exactly(:message, :errors)
+        expect(salaries_response[:message]).to eq("param is missing or the value is empty")
+        
+        expect(salaries_response[:errors].count).to eq(1)
+        expect(salaries_response[:errors].first).to eq("Missing destination")
+      end
+
+      it "returns 404 serialized error when unable to find destination" do
+        VCR.use_cassette("Destination Not Found") { post api_v1_salaries_path(destination: "avon") }
+
+        salaries_response = JSON.parse(response.body, symbolize_names: true)
+
+        expect(response).to_not be_successful
+
+        expect(salaries_response.keys).to contain_exactly(:message, :errors)
+        expect(salaries_response[:message]).to eq("your query could not be completed")
+        
+        expect(salaries_response[:errors].count).to eq(1)
+        expect(salaries_response[:errors].first).to eq("Destination not found")
+      end
     end
   end
 end
