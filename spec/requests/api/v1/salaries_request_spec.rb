@@ -4,7 +4,7 @@ RSpec.describe "Salaries API Request" do
   describe "Salaries Create" do
     context "Successful Request" do
       it "returns salary JSON object of salaries information for a specified location" do
-        VCR.use_cassette("Chicago Salaries") { post api_v1_salaries_index_path(destination: "chicago") }
+        VCR.use_cassette("Chicago Salaries") { post api_v1_salaries_path(destination: "chicago") }
 
         salaries_response = JSON.parse(response.body, symbolize_names: true)
         binding.pry
