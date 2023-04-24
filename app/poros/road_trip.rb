@@ -24,6 +24,7 @@ class RoadTrip
       @start_city = @data[:origin]
       @end_city = @data[:destination]
       @travel_time = "Impossible Route"
+      @weather_at_eta = nil
     end
 
     def city_state(location)
