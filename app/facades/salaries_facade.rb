@@ -6,7 +6,8 @@ class SalariesFacade
   def salaries_details
     weather = current_weather
     salaries = TeleportService.new(@params).salaries_information
-    
+
+    raise ActionController::BadRequest.new("Destination not found") if salaries[:status] == 404
     Salaries.new(combine_json_data(weather, salaries))
   end
 
